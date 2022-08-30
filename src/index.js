@@ -1,19 +1,24 @@
-const express = require('express');
-const app = express();
+import { Application, Router  } from "https://deno.land/x/oak@v6.5.0/mod.ts";
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const app = new Application();
+const router = new Router();
 
-app.get('/', (req, res) => {
-  try {
-    res.send({ name: "hoge" });
-  } catch (error) {
-    res.sendStatus(500);
-  }
+app.addEventListener("listen", ({ hostname, port, secure }) => {
+  console.log(
+    `Listening on: ${secure ? "https://" : "http://"}${hostname ??
+      "localhost"}:${port}`,
+  );
 });
 
-app.listen({ port: 3000 }, () => {
-  console.log(`Server ready at http://localhost:3000`);
+app.addEventListener("error", (evt) => {
+  console.log(evt.error);
 });
-console.log('starts');
 
+router.get('/', (ctx) => {
+  ctx.response.body = "Hello World!";
+})
+
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+await app.listen({ port: 8080 });
