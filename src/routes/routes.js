@@ -1,18 +1,29 @@
 const express = require('express');
 let {
     getUserList,
-    newUser,
+    addUser,
     getUserById,
 } = require('../controllers/userControllers');
+const {
+    getMissionList,
+    addMission,
+} = require('../controllers/missionControllers');
 
-let userRouter = express.Router();
+let router = express.Router();
 
-userRouter.route('/')
+router.route('/users')
     .get(getUserList)
-    .post(newUser);
+    .post(addUser);
 
-userRouter.route('/:id')
+router.route('/users/:id')
     .get(getUserById)
 
-module.exports = userRouter;
+
+
+router.route('/missions')
+    .get(getMissionList)
+    .post(addMission);
+
+
+module.exports = router;
 
