@@ -6,10 +6,19 @@ const missionService = require('../services/missionService');
 const getMissionList = async (req, res) => {
     try {
         let result = await missionService.getAllMission();
-
         res.json(result);
     } catch (error) {
         res.status(404).json({ message: 'ミッション覧を取得できません' })
+    }
+}
+
+const getMissionById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        let result = await missionService.getMissionById(id);
+        res.json(result);
+    } catch (error) {
+        res.status(404).json({ message: 'ミッションを取得できません' })
     }
 }
 
@@ -25,7 +34,6 @@ class missionListInterface {
 }
 
 class missionInterface {
-
     /**
      *  @param {number} id
      *  @param {string} title
@@ -67,5 +75,6 @@ const addMission = async (req, res) => {
 
 module.exports = {
     getMissionList,
+    getMissionById,
     addMission,
 }

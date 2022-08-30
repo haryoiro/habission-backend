@@ -25,7 +25,21 @@ const addMission = async (title, description, point) => {
     }
 }
 
+const getMissionById = async (id) => {
+    try {
+        return await Missions.findOne({
+            where: {
+                id
+            }
+        });
+    } catch (error) {
+        console.log("failed to get mission by id", error);
+        return error;
+    }
+}
+
 module.exports = {
     getAllMission,
+    getMissionById,
     addMission
 }

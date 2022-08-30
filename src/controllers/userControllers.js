@@ -74,7 +74,8 @@ const addUser = async (req, res) => {
  * ユーザIDからユーザを取得
  */
 const getUserById = async (req, res) => {
-    const { id } = req.query;
+    const { id } = req.params;
+    console.log(id);
     try {
         let result = await userService.getUserById(id);
         res.status(200).json(result);
