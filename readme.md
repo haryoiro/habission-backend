@@ -8,13 +8,15 @@ npx sequelize db:seed:all
 npm run dev
 ```
 
-| method | path         | action                       | return    |
-| ------ | ------------ | ---------------------------- | --------- |
-| GET    | /missions    | 全てのミッションを取得       | Mission[] |
-| POST   | /missions    | ミッションを作成             | Message   |
-| GET    | /mission/:id | idに合致するミッションを取得 | Mission   |
-| GET    | /users       | 全てのユーザを取得           | User[]    |
-| POST   | /users       | ユーザを作成                 | Message   |
+| method | path                                           | action                       | return    | error | success |
+| ------ | ---------------------------------------------- | ---------------------------- | --------- | ----- | ------- |
+| GET    | /missions                                      | 全てのミッションを取得       | Mission[] |       |         |
+| POST   | /missions?title=str&description=desc&point=num | ミッションを作成             | Message   |       |         |
+| GET    | /mission/:id                                   | idに合致するミッションを取得 | Mission   |       |         |
+| GET    | /users                                         | 全てのユーザを取得           | User[]    |       |         |
+| POST   | /register                                      | ユーザを作成                 | Message   |       |         |
+| POST   | /login                                         | ログイン（）                 | Message   |       |         |
+
 
 ```ts
 interface Mission {

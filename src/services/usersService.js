@@ -4,7 +4,6 @@ const models = require('../../sequelize/module/user');
 const getAllUsers = async () => {
     try {
         return await Users.findAll();
-
     } catch (error) {
         console.log(error);
         return error;
@@ -27,9 +26,10 @@ const getUserById = async (id) => {
 
 const addUser = async (name, pass) => {
     try {
+        let hashedPassword = genHash(pass);
         return await Users.create({
             name,
-            pass
+            pass: hashedPassword
         });
     } catch (error) {
         console.log(error);

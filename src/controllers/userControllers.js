@@ -1,6 +1,40 @@
 
 const userService = require('../services/usersService')
+const crypto = require('crypto');
+const genHash = (pass) => {
+    let sha256 = crypto.createHash('sha256');
+    sha256.update(pass);
+    return sha256.digest('hex');
+}
 
+const verify = (id, pass) => {
+    try {
+        let hash = genHash(pass);
+        let user = userService.getUserById(id);
+        if (user.password === hash) {
+            return true;
+        }
+        return false;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+
+}
+
+
+const login = async (req, res) => {
+    const { query } = req;
+    let { id, pass } = query;
+    if (!(id && pass)) {
+        res.status(400).json({ message: 'idとpassが必要です' })
+    }
+    if (verify(id, pass)) {
+        res.json({ message: 'ログインに成功しました' })
+    } else {
+        res.status(400).json({ message: 'ログインに失敗しました' })
+    }
+}
 
 const getUserList = async (req, res) => {
     try {
@@ -28,7 +62,8 @@ const addUser = async (req, res) => {
     }
 
     try {
-        let result = await userService.addUser(name, password);
+        let hashedPassword = genHash(password);
+        let result = await userService.addUser(name,hashedPassword);
         res.status(200).json({ message: 'ユーザを追加しました。' });
     } catch (error) {
         res.status(401).json({ message: `ユーザを追加できませんでした。 ${error}` })
@@ -81,4 +116,6 @@ module.exports = {
     addUser,
     getUserById,
     getUserTask,
+    login,
+    doneUserTask,
 }
