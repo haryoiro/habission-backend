@@ -65,8 +65,8 @@ const addMission = async (req, res) => {
             point = 1;
         }
 
-        let result = await missionService.addMission(title, description, point);
-        res.status(200).json({ message: `ミッションが追加されました。`});
+        await missionService.addMission(title, description, point);
+        res.status(201).json({ message: `ミッションが追加されました。`});
     } catch (error) {
         console.log(error)
         res.status(401).json({ message: 'ミッションを追加できませんでした。' })

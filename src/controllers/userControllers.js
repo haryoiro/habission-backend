@@ -23,7 +23,6 @@ const verify = (id, pass) => {
 
 }
 
-
 const login = async (req, res) => {
     const { query } = req;
     let { id, pass } = query;
@@ -31,9 +30,9 @@ const login = async (req, res) => {
         res.status(400).json({ message: 'idとpassが必要です' })
     }
     if (verify(id, pass)) {
-        res.json({ message: 'ログインに成功しました' })
+        res.status(204).json({ message: 'ログインに成功しました' })
     } else {
-        res.status(400).json({ message: 'ログインに失敗しました' })
+        res.status(401).json({ message: 'ログインに失敗しました' })
     }
 }
 
@@ -65,7 +64,7 @@ const addUser = async (req, res) => {
     try {
         let hashedPassword = genHash(password);
         let result = await userService.addUser(name,hashedPassword);
-        res.status(200).json({ message: 'ユーザを追加しました。' });
+        res.status(201).json({ message: 'ユーザを追加しました。' });
     } catch (error) {
         res.status(401).json({ message: `ユーザを追加できませんでした。 ${error}` })
     }
@@ -107,7 +106,7 @@ const doneUserTask = async (req, res) => {
         }
 
         let result = await userTaskService.doneUserTask(user_id, mission_id);
-        res.status(200).json(result);
+        res.status(201).json({ message: 'user task done'});
     } catch (error) {
         res.status(404).json({ message: 'User task not found' })
     }

@@ -22,6 +22,7 @@ const doneUserTask = async (user_id, mission_id) => {
                 mission_id
             }
         });
+
         let createOrUpdateUserTask = UserTask.update({
             done: true
         }, {
