@@ -1,4 +1,4 @@
-const {Users} = require('../../sequelize/module/index');
+const {Users,UserTask} = require('../../sequelize/module/index');
 const models = require('../../sequelize/module/user');
 
 const getAllUsers = async () => {
@@ -24,6 +24,7 @@ const getUserById = async (id) => {
     }
 }
 
+
 const addUser = async (name, pass) => {
     try {
         return await Users.create({
@@ -41,5 +42,5 @@ const addUser = async (name, pass) => {
 module.exports = {
     getAllUsers,
     getUserById,
-    addUser
+    addUser,
 }

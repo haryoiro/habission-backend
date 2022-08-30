@@ -60,6 +60,22 @@ const getUserTask = async (req, res) => {
     }
 }
 
+const doneUserTask = async (req, res) => {
+    const { user_id, mission_id } = req.query;
+
+    if (!user_id || !mission_id) {
+        res.status(400).json({ message: 'user_idとmission_idが必要です' })
+    }
+
+    try {
+        let result = await userService.doneUserTask(user_id, mission_id);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(404).json({ message: 'User task not found' })
+    }
+}
+
+
 module.exports = {
     getUserList,
     addUser,

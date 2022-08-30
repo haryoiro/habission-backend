@@ -1,5 +1,8 @@
 const missionService = require('../services/missionService');
 
+/**
+ * @returns {missionListInterface[]}
+ */
 const getMissionList = async (req, res) => {
     try {
         let result = await missionService.getAllMission();
@@ -7,6 +10,36 @@ const getMissionList = async (req, res) => {
         res.json(result);
     } catch (error) {
         res.status(404).json({ message: 'ミッション覧を取得できません' })
+    }
+}
+
+class missionListInterface {
+    missionList
+    /**
+     * @param {missionInterface[]} missionList
+     * @returns {missionListInterface}
+     */
+    constructor(missionList) {
+        this.missionList = missionList;
+    }
+}
+
+class missionInterface {
+
+    /**
+     *  @param {number} id
+     *  @param {string} title
+     *  @param {string} description
+     *  @param {number} point
+     *  @returns {missionInterface}
+     */
+    constructor(id, title, description, point, createdAt, updatedAt) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.point = point;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 }
 

@@ -15,10 +15,8 @@ router.route('/users')
     .get(getUserList)
     .post(addUser);
 
-router.route('/users/:id')
+router.route('/user/:id')
     .get(getUserById)
-
-
 
 router.route('/missions')
     .get(getMissionList)
