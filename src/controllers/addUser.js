@@ -19,7 +19,6 @@ const addUser = async (req, res) => {
     } catch (error) {
         res.send(errorResponse({ message: 'Error adding user' }))
     }
-
 }
 
 module.exports = { addUser }
