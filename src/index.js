@@ -1,18 +1,16 @@
-
 require('dotenv').config();
-const { addUser } = require('./controllers/addUser')
-const { getUsers } = require('./controllers/getUsers')
+
+const  routes  = require('./routes/routes')
 const db = require('./db');
 
 const express = require('express')
 const app = express()
-const port = process.env.PORT||3000
+const port = process.env.PORT || 3000;
 
-app.get('/', async (req, res) => {
-    res.send('ROOT')
-})
-app.post('/user', addUser);
-app.get('/users', getUsers)
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/', routes)
 
 app.listen(port, () => {
     console.log(`Example app listening on port localhost:${port} !`)
