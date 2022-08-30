@@ -7,10 +7,10 @@ const { createTestTable, createUserTable } = require('./query/createTable');
 const dbUrl = process.env.DATABASE_URL;
 
 const client = new Client({
-    user: process.env.DB_USER,
     host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
     password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
     port: process.env.DB_PORT,
     ssl: {
         rejectUnauthorized: false
