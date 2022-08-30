@@ -17,4 +17,3 @@ app.listen({ port: 3000 }, () => {
 });
 console.log('starts');
 
-export default app;
