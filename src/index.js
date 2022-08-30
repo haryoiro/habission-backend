@@ -1,24 +1,23 @@
-import { Application, Router  } from "https://deno.land/x/oak@v6.5.0/mod.ts";
+const {addUser } = require('./controllers/users')
+const db = require('./db');
 
-const app = new Application();
-const router = new Router();
+const express = require('express')
+const app = express()
+const port = 3000
 
-app.addEventListener("listen", ({ hostname, port, secure }) => {
-  console.log(
-    `Listening on: ${secure ? "https://" : "http://"}${hostname ??
-      "localhost"}:${port}`,
-  );
-});
 
-app.addEventListener("error", (evt) => {
-  console.log(evt.error);
-});
 
-router.get('/', (ctx) => {
-  ctx.response.body = "Hello World!";
+app.get('/', async (req, res) => {
+
+    res.send('ROOT')
+})
+app.post('/user', addUser);
+app.get('/users', async (req, res) => {
+
 })
 
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.listen(port, () => {
+    console.log(`Example app listening on port localhost:${port} !`)
+})
 
-await app.listen({ port: 8080 });
+
