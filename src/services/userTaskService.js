@@ -15,7 +15,6 @@ const getUserTask = async (user_id) => {
     }
 }
 const doneUserTask = async (user_id, mission_id) => {
-
     try {
         let foundUserTask = await UserTask.findOne({
             where: {

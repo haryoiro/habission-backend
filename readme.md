@@ -14,9 +14,10 @@ npm run dev
 | POST   | /missions?title=str&description=desc&point=num | ミッションを作成             | Message   |       |         |
 | GET    | /mission/:id                                   | idに合致するミッションを取得 | Mission   |       |         |
 | GET    | /users                                         | 全てのユーザを取得           | User[]    |       |         |
+| PATCH  | /users?user_id=num&mission_id=num              | タスクを完了させる           | Message   |       |         |
+| GET    | /user/:id                                      | idに合致するユーザを取得     | User      |       |         |
 | POST   | /register                                      | ユーザを作成                 | Message   |       |         |
 | POST   | /login                                         | ログイン（）                 | Message   |       |         |
-
 
 ```ts
 interface Mission {

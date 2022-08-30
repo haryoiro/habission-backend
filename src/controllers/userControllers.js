@@ -1,5 +1,6 @@
 
 const userService = require('../services/usersService')
+const userTaskService = require('../services/userTaskService');
 const crypto = require('crypto');
 const genHash = (pass) => {
     let sha256 = crypto.createHash('sha256');
@@ -55,7 +56,7 @@ const getUserList = async (req, res) => {
  * }
  */
 const addUser = async (req, res) => {
-    const { name, password } = req.body;
+    const { name, password } = req.query;
 
     if (!name || !password) {
         res.status(400).json({ message: 'nameとpasswordが必要です' })
@@ -99,12 +100,13 @@ const getUserTask = async (req, res) => {
 const doneUserTask = async (req, res) => {
     const { user_id, mission_id } = req.query;
 
-    if (!user_id || !mission_id) {
-        res.status(400).json({ message: 'user_idとmission_idが必要です' })
-    }
-
     try {
-        let result = await userService.doneUserTask(user_id, mission_id);
+
+        if (!user_id || !mission_id) {
+            res.status(400).json({ message: 'user_idとmission_idが必要です' })
+        }
+
+        let result = await userTaskService.doneUserTask(user_id, mission_id);
         res.status(200).json(result);
     } catch (error) {
         res.status(404).json({ message: 'User task not found' })
