@@ -1,4 +1,5 @@
-const {addUser } = require('./controllers/addUser')
+const { addUser } = require('./controllers/addUser')
+const { getUsers } = require('./controllers/getUsers')
 const db = require('./db');
 
 const express = require('express')

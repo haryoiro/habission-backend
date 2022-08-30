@@ -1,10 +1,11 @@
 {
   "scripts": {
-    "serve": "node ./src/index.js"
+    "start": "node ./src/index.js"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "pg": "^8.8.0"
-  }
+  },
+  "engines": {}
 }

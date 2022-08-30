@@ -1,6 +1,5 @@
 const db = require('../db')
 const { successResponse, errorResponse } = require('../utils')
-const { addUserQuery } = require('../query/addUser')
 
 const addUserQuery = (name, pass) => {
     return {
