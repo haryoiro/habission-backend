@@ -9,15 +9,7 @@ const getAllUsers = async () => {
         //         foreignKey: 'user_ id'
         // });
 
-        let user_tasks = await UserTask.findAll({
-            where: {
-                done: false
-            },
-            include: [{
-                modle: Users,
-
-            }]
-        });
+        let user_tasks = await UserTask.findAll();
         return user_tasks;
     } catch (error) {
         console.log(error);
