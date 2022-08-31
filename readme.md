@@ -17,7 +17,7 @@ npm run dev
 | PATCH  | /users?user_id=num&mission_id=num              | タスクを完了させる           | Message   |       |         |
 | GET    | /user/:id                                      | idに合致するユーザを取得     | User      |       |         |
 | POST   | /register                                      | ユーザを作成                 | Message   |       |         |
-| POST   | /login?id=1&pass=str                           | ログイン                     | Message   |       |         |
+| POST   | /login?name=str&pass=str                           | ログイン                     | Message   |       |         |
 
 ```ts
 interface Mission {
