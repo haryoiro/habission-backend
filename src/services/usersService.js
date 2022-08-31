@@ -1,29 +1,16 @@
-const {Users,UserTask} = require('../../sequelize/module/index');
-const models = require('../../sequelize/module/user');
+const {Users, UserTask} = require('../../sequelize/module/index');
+const { genHash } = require('../utils');
 
 const getAllUsers = async () => {
     try {
-        let user_tasks = await User.findAll();
+        let user_tasks = await Users.findAll();
         return user_tasks;
     } catch (error) {
         console.log(error);
         return error;
     }
 }
-const getAllUsersRel = async () => {
-    try {
-        await Users.hasMany(UserTask);
-        await UserTask.belongTo(Users, {
-            foreignKey: 'user_id'
-        })
-        return await Users.findAll({
-            include: [UserTask]
-        });
-    } catch (error) {
-        console.log(error);
-        return error;
-    }
-}
+
 
 const getUserByName = async (name) => {
     try {

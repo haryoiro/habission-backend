@@ -1,26 +1,8 @@
 const userService = require('../services/usersService')
 const userTaskService = require('../services/userTaskService');
-const crypto = require('crypto');
 
-const genHash = (pass) => {
-    let sha256 = crypto.createHash('sha256');
-    sha256.update(pass);
-    return sha256.digest('hex');
-}
+const { verify } = require('../utils');
 
-const verify = (name, pass) => {
-    try {
-        let hash = genHash(pass);
-        let user = userService.getUserByName(name);
-        if (user.password === hash) {
-            return true;
-        }
-        return false;
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
 
 const login = async (req, res) => {
     const { query } = req;
@@ -79,11 +61,15 @@ const addUser = async (req, res) => {
  */
 const getUserById = async (req, res) => {
     const { id } = req.params;
-    console.log(id);
+    const { mission } = req.query;
+    console.log(mission);
     try {
-        let result = await userService.getUserById(id);
-        delete result.pass
-        res.status(200).json(result);
+
+        if (mission) {
+            res.status(200).json(await userService.getUserById(id));
+        } else {
+            res.status(200).json(await userTaskService.getUserTask(id));
+        }
     }
     catch (error) {
         res.status(404).json({ message: 'User not found' })
@@ -91,7 +77,9 @@ const getUserById = async (req, res) => {
 }
 
 const getUserTask = async (req, res) => {
-    const { id } = req.query;
+    console.log("user task")
+    const { id } = req.params;
+    console.log("user task")
     try {
         let result = await userService.getUserTask(id);
         res.status(200).json(result);

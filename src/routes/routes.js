@@ -3,6 +3,7 @@ let {
     getUserList,
     addUser,
     getUserById,
+
     doneUserTask,
     login,
 } = require('../controllers/userControllers');
@@ -18,8 +19,10 @@ let router = express.Router();
 router.route('/users')
     .get(getUserList)
     .patch(doneUserTask)
+
 router.route('/user/:id')
     .get(getUserById)
+
 
 router.route('/missions')
     .get(getMissionList)

@@ -1,9 +1,30 @@
-const { Missions, UserTask } = require('../../sequelize/module/index');
+const { Missions, UserTask, Users } = require('../../sequelize/module/index');
 const models = require('../../sequelize/module/mission');
 
 
 const getUserTask = async (user_id) => {
+    console.log(user_id);
+    console.log("user?id")
     try {
+        let userTasks = await UserTask.findOne({
+            where: {
+                user_id: user_id
+            }
+        });
+
+        for (let i in userTasks) {
+            console.log(i)
+
+            let mission = await Missions.findOne({
+                where: {
+                    id: i.mission_id
+                }
+            });
+
+            Object.assign(user_tasks[i], mission);
+        }
+        console.log(user_tasks)
+
         return await UserTask.findAll({
             where: {
                 user_id
