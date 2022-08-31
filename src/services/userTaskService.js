@@ -55,7 +55,6 @@ const doneUserTask = async (user_id, mission_id) => {
             })
         }
 
-
         return {createOrUpdateUserTask, created: false};
     } catch (error) {
         console.log(error);

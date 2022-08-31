@@ -22,11 +22,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'UserTask',
   });
 
-  UserTask.hasOne(models.User, {
-    foreignKey: 'id',
-  });
-  User.belongsToMany(UserTask, {
-
-  })
   return UserTask;
 };
