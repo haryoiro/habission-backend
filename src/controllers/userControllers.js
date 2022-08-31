@@ -1,16 +1,17 @@
 const userService = require('../services/usersService')
 const userTaskService = require('../services/userTaskService');
 const crypto = require('crypto');
+
 const genHash = (pass) => {
     let sha256 = crypto.createHash('sha256');
     sha256.update(pass);
     return sha256.digest('hex');
 }
 
-const verify = (id, pass) => {
+const verify = (name, pass) => {
     try {
         let hash = genHash(pass);
-        let user = userService.getUserById(id);
+        let user = userService.getUserByName(name);
         if (user.password === hash) {
             return true;
         }
@@ -23,12 +24,14 @@ const verify = (id, pass) => {
 
 const login = async (req, res) => {
     const { query } = req;
-    let { id, pass } = query;
-    if (!(id && pass)) {
+    let { name, pass } = query;
+    if (!(name && pass)) {
         res.status(400).json({ message: 'idとpassが必要です' })
     }
-    if (verify(id, pass)) {
-        res.status(204).json({ id })
+    if (verify(name, pass)) {
+        res.status(204).json({ id }).cookie('manin_id', id, {
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+        })
     } else {
         res.status(401).json({ message: 'ログインに失敗しました' })
     }
@@ -55,14 +58,15 @@ const getUserList = async (req, res) => {
  * }
  */
 const addUser = async (req, res) => {
-    const { name, password } = req.query;
+    const { name, pass } = req.query;
+    console.log(name, pass);
 
-    if (!name || !password) {
+    if (!name || !pass) {
         res.status(400).json({ message: 'nameとpasswordが必要です' })
     }
 
     try {
-        let hashedPassword = genHash(password);
+        let hashedPassword = genHash(pass);
         let result = await userService.addUser(name,hashedPassword);
         res.status(201).json({ message: 'ユーザを追加しました。' });
     } catch (error) {

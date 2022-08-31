@@ -25,11 +25,23 @@ const getAllUsersRel = async () => {
     }
 }
 
+const getUserByName = async (name) => {
+    try {
+        return await Users.findOne({
+            where: {
+                name,
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+}
 const getUserById = async (id) => {
     try {
         return await Users.findOne({
             where: {
-                id
+                id,
             }
         });
     } catch (error) {
@@ -53,6 +65,7 @@ const addUser = async (name, pass) => {
 
 module.exports = {
     getAllUsers,
+    getUserByName,
     getUserById,
     addUser,
 }

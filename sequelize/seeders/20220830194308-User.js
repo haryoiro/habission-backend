@@ -16,11 +16,13 @@ module.exports = {
     await queryInterface.bulkInsert('Users', [{
       name: 'user1',
       pass: 'password',
+      rank: 1,
       createdAt: now,
       updatedAt: now,
     }, {
       name: 'user2',
       pass: 'password',
+      rank: 1,
       createdAt: now,
       updatedAt: now,
       }], {});
