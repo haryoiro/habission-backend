@@ -8,7 +8,31 @@ const getAllUsers = async () => {
         //     {
         //         foreignKey: 'user_ id'
         // });
-        return await Users.findAll();
+
+        let user_tasks = await UserTask.findAll({
+            where: {
+                done: false
+            },
+            include: [{
+                modle: Users,
+
+            }]
+        });
+
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+}
+const getAllUsersRel = async () => {
+    try {
+        await Users.hasMany(UserTask);
+        await UserTask.belongTo(Users, {
+            foreignKey: 'user_id'
+        })
+        return await Users.findAll({
+            include: [UserTask]
+        });
     } catch (error) {
         console.log(error);
         return error;

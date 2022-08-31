@@ -21,5 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'UserTask',
   });
+
+  UserTask.hasOne(models.User, {
+    foreignKey: 'id',
+  });
+  User.belongsToMany(UserTask, {
+
+  })
   return UserTask;
 };
