@@ -78,6 +78,7 @@ const getUserById = async (req, res) => {
     console.log(id);
     try {
         let result = await userService.getUserById(id);
+        delete result.pass
         res.status(200).json(result);
     }
     catch (error) {

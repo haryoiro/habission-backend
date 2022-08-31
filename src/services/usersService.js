@@ -3,13 +3,7 @@ const models = require('../../sequelize/module/user');
 
 const getAllUsers = async () => {
     try {
-        // Users.hasMany(UserTask);
-        // UserTask.belongTo(Users,
-        //     {
-        //         foreignKey: 'user_ id'
-        // });
-
-        let user_tasks = await UserTask.findAll();
+        let user_tasks = await User.findAll();
         return user_tasks;
     } catch (error) {
         console.log(error);
