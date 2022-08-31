@@ -1,4 +1,4 @@
-const { Missions, UserTask } = require('../../sequelize/module/index');
+const { Missions, UserTask, sequelize } = require('../../sequelize/module/index');
 const models = require('../../sequelize/module/mission');
 
 const getAllMission = async () => {
@@ -38,8 +38,21 @@ const getMissionById = async (id) => {
     }
 }
 
+const getMissionPoint = async()=>{
+    try{
+        return await Missions.findAll({
+            attributes :['point',
+            [sequelize.fn('sum' , sequelize.col('point'))]],
+            group:['id'] 
+    })
+    }catch (error) {
+        console.log("failed to get Mission Point", error);
+        return error;
+    }
+}
 module.exports = {
     getAllMission,
     getMissionById,
-    addMission
+    addMission,
+    getMissionPoint
 }
