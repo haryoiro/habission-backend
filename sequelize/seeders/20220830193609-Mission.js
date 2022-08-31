@@ -13,16 +13,41 @@ module.exports = {
     */
     const now = new Date();
     await queryInterface.bulkInsert('Missions' , [{
-      title: 'mission1',
+      title: 'ゴミは捨てましたか？ ',
       description: 'mission1',
       createdAt: now,
       updatedAt: now,
     }, {
-      title: 'mission2',
+      title: 'お風呂に入りましたじゃ？',
       description: 'mission2',
       createdAt: now,
       updatedAt: now,
-      }], {});
+    },{
+      title: '朝ごはんは食べましたか？',
+      description: 'mission2',
+      createdAt: now,
+      updatedAt: now,
+    },{
+        title: '歯磨きはしましたか？',
+        description: 'mission2',
+        createdAt: now,
+        updatedAt: now,
+    }, {
+        title: '息はしてまいますか？',
+        description: 'mission2',
+        createdAt: now,
+        updatedAt: now,
+    }, {
+      title: '外に出ていますか？',
+      description: 'mission2',
+      createdAt: now,
+      updatedAt: now,
+    }, {
+        title: '誰かと毎日話していますか？？',
+        description: 'mission2',
+        createdAt: now,
+        updatedAt: now,
+    }], {});
   },
 
   async down (queryInterface, Sequelize) {

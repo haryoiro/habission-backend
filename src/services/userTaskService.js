@@ -11,9 +11,14 @@ const getUserTask = async (user_id) => {
                 user_id: user_id
             }
         });
+        if (!userTasks) {
+            console.log("user tasks is null")
+            return null;
+        }
+        console.log(userTasks.length)
 
-        for (let i in userTasks) {
-            console.log(i)
+        for (let i of userTasks) {
+            console.log("data",i)
 
             let mission = await Missions.findOne({
                 where: {
@@ -21,9 +26,9 @@ const getUserTask = async (user_id) => {
                 }
             });
 
-            Object.assign(user_tasks[i], mission);
+            Object.assign(i, mission);
         }
-        console.log(user_tasks)
+        console.log(userTasks)
 
         return await UserTask.findAll({
             where: {

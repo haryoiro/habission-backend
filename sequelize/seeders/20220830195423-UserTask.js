@@ -11,6 +11,20 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+
+    await queryInterface.bulkInsert('UserTasks', [{
+      user_id: 1,
+      mission_id: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      done: true,
+    }, {
+      user_id: 1,
+      mission_id: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      done: true,
+    }], {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -20,5 +34,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('UserTasks', null, {});
   }
 };

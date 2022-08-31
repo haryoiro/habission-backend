@@ -18,11 +18,10 @@ let router = express.Router();
 
 router.route('/users')
     .get(getUserList)
-    .patch(doneUserTask)
+    .post(doneUserTask)
 
 router.route('/user/:id')
     .get(getUserById)
-
 
 router.route('/missions')
     .get(getMissionList)
