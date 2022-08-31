@@ -16,7 +16,7 @@ const getUserTask = async (user_id) => {
 }
 const doneUserTask = async (user_id, mission_id) => {
     try {
-        let foundUserTask = await UserTask.findOne({
+        await UserTask.findOne({
             where: {
                 user_id,
                 mission_id
@@ -39,6 +39,15 @@ const doneUserTask = async (user_id, mission_id) => {
             });
             return { task, created: true };
         }
+        // 加算処理
+        let currMission = await Missions.findOne({
+            where: {
+                id: mission_id
+            }
+        })
+
+        let currUser =
+
 
         return {createOrUpdateUserTask, created: false};
     } catch (error) {

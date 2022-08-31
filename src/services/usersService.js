@@ -18,7 +18,7 @@ const getAllUsers = async () => {
 
             }]
         });
-
+        return user_tasks;
     } catch (error) {
         console.log(error);
         return error;
