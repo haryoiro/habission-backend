@@ -22,7 +22,6 @@ const doneUserTask = async (user_id, mission_id) => {
                 mission_id
             }
         });
-
         let createOrUpdateUserTask = UserTask.update({
             done: true
         }, {
@@ -45,8 +44,16 @@ const doneUserTask = async (user_id, mission_id) => {
                 id: mission_id
             }
         })
-
-        let currUser =
+        let currUser = await Users.findOne({
+            where: {
+                id: user_id
+            }
+        });
+        if (currUser) {
+            await Users.update({
+                rank: currUser.point + currMission.point
+            })
+        }
 
 
         return {createOrUpdateUserTask, created: false};

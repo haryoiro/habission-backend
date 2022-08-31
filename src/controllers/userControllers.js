@@ -28,7 +28,7 @@ const login = async (req, res) => {
         res.status(400).json({ message: 'idとpassが必要です' })
     }
     if (verify(id, pass)) {
-        res.status(204).json({ message: 'ログインに成功しました' })
+        res.status(204).json({ id })
     } else {
         res.status(401).json({ message: 'ログインに失敗しました' })
     }
