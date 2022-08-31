@@ -1,4 +1,3 @@
-
 const userService = require('../services/usersService')
 const userTaskService = require('../services/userTaskService');
 const crypto = require('crypto');
@@ -20,7 +19,6 @@ const verify = (id, pass) => {
         console.log(error);
         return false;
     }
-
 }
 
 const login = async (req, res) => {
@@ -39,12 +37,14 @@ const login = async (req, res) => {
 const getUserList = async (req, res) => {
     try {
         let result = await userService.getAllUsers()
+
         res.status(200).json(result);
     }
     catch (error) {
         res.status(404).json({ message: 'User not found' })
     }
 }
+
 /**
  * ユーザを追加する。
  * セキュリティは一切なし。

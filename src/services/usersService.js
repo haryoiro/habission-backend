@@ -3,12 +3,11 @@ const models = require('../../sequelize/module/user');
 
 const getAllUsers = async () => {
     try {
-        Users.hasMany(UserTask);
-
-        UserTask.belongTo(Users,
-            {
-                foreignKey: 'user_ id'
-        });
+        // Users.hasMany(UserTask);
+        // UserTask.belongTo(Users,
+        //     {
+        //         foreignKey: 'user_ id'
+        // });
         return await Users.findAll();
     } catch (error) {
         console.log(error);
@@ -29,7 +28,6 @@ const getUserById = async (id) => {
     }
 }
 
-
 const addUser = async (name, pass) => {
     try {
         let hashedPassword = genHash(pass);
@@ -42,8 +40,6 @@ const addUser = async (name, pass) => {
         return error;
     }
 }
-
-
 
 module.exports = {
     getAllUsers,
